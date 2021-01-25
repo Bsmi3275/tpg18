@@ -24,21 +24,23 @@ self.skipWaiting();
 });
 
 
+self.addEventListener("activate", function(evt) {
+    evt.waitUntil(
+      caches.keys().then(keyList => {
+        return Promise.all(
+          keyList.map(key => {
+            if (key !== static && key !== cache) {
+              console.log("Removing old cache data", key);
+              return caches.delete(key);
+            }
+          })
+        );
+      })
+    );
+  
+    self.clients.claim();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 
 self.addEventListener("fetch", function (evt) {
@@ -70,16 +72,25 @@ self.addEventListener("fetch", function (evt) {
 
 
 
-    event.respondWith(
-        fetch(event.request).catch(function () {
-            return caches.match(event.request).then(function (response) {
-                if (response) {
-                    return response;
-                } else if (event.request.headers.get("accept").includes("text/html")) {
+    // event.respondWith(
+    //     fetch(event.request).catch(function () {
+    //         return caches.match(event.request).then(function (response) {
+    //             if (response) {
+    //                 return response;
+    //             } else if (event.request.headers.get("accept").includes("text/html")) {
 
-                    return caches.match("/");
-                }
-            });  
+    //                 return caches.match("/");
+    //             }
+    //         });
+    //     })
+    // );
+
+    evt.respondWith(
+        caches.open(static).then(cache => {
+        return cache.match(evt.request).then(response => {
+            return response || fetch(evt.request);
+        });
         })
     );
+
 });

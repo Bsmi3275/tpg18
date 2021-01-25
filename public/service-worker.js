@@ -76,12 +76,10 @@ self.addEventListener("fetch", function (evt) {
                 if (response) {
                     return response;
                 } else if (event.request.headers.get("accept").includes("text/html")) {
-                    
+
                     return caches.match("/");
                 }
             });  
         })
     );
 });
-
-

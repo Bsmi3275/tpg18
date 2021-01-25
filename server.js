@@ -3,9 +3,11 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
 
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-const app = express();
+//connecting to Atlas (tricky)
+mongodb+srv://Bsmi3275:<Bensmith1>@tpg.uxc4o.mongodb.net/<tpg>?retryWrites=true&w=majority
 
 app.use(logger("dev"));
 
@@ -25,6 +27,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
 // routes
 app.use(require("./routes/api.js"));
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
+//PORT function
+app.listen(PORT, function () {
+  console.log(`App listening on http://localhost:${PORT}`);
+  
 });

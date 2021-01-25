@@ -1,11 +1,11 @@
 body {
   font-size: 120%;
-  font-family: Arial;
+  font-family: 'Book Antiqua', serif;
 }
 
 button, input {
   font-size: 100%;
-  font-family: Arial;
+  font-family: 'Book Antiqua', serif;
 }
 
 table {
@@ -16,6 +16,15 @@ td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+.hero {
+  height: 800px;
+  width: 100%;
+  margin-bottom: 25px;
+  background-image: url("digital-marketing-meeting.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 tr:nth-child(even) {

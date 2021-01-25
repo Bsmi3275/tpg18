@@ -1,0 +1,20 @@
+{
+    "name": "budget",
+    "short-name": "tpg",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start-url": "/",
+    "background-color": "#6495ED",
+    "display": "standalone",
+    "theme_color": "#6495ED"
+}

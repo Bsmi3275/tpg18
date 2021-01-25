@@ -1,7 +1,3 @@
-const { response } = require("express");
-
-console.log("It's all good!");
-
 const static = "static-cache-v2";
 const data = "data-cache-v1";
 const offToOn = [
@@ -13,6 +9,7 @@ const offToOn = [
     "icons/icons-512x512.png",
     "db.js",
 ];
+
 
 self.addEventListener("install", function (evt) {
     evt.waitUntil(
@@ -26,7 +23,26 @@ self.skipWaiting();
 
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 self.addEventListener("fetch", function (evt) {
+    
     if (evt.request.url.includes("/api/")) {
         evt.respondWith(
             caches
@@ -34,6 +50,7 @@ self.addEventListener("fetch", function (evt) {
             .then((cache) => {
                 return fetch(evt.request)
                 .then((response) => {
+
                     if (response.status === 200) {
                         cache.put(evt.request.url, response.clone());
                     }
@@ -41,6 +58,7 @@ self.addEventListener("fetch", function (evt) {
                     return response;
                 })
                 .catch((err) => {
+
                     return cache.match(evt.request);
                 });
             })
@@ -50,12 +68,15 @@ self.addEventListener("fetch", function (evt) {
         return;
     }
 
+
+
     event.respondWith(
         fetch(event.request).catch(function () {
             return caches.match(event.request).then(function (response) {
                 if (response) {
                     return response;
                 } else if (event.request.headers.get("accept").includes("text/html")) {
+                    
                     return caches.match("/");
                 }
             });  

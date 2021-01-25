@@ -13,6 +13,7 @@ request.onupgradeneeded = function (event) {
 request.onsuccess = function (event) {
   db = event.target.result;
 
+
   if (navigator.onLine) {
     checkDatabase();
   }
@@ -23,16 +24,22 @@ request.onerror = function (event) {
 };
 
 function saveRecord(record) {
+
   const transaction = db.transaction(["pending"], "readwrite");
 
+
   const store = transaction.objectStore("pending");
+
 
   store.add(record);
 }
 
 function checkDatabase() {
+
   const transaction = db.transaction(["pending"], "readwrite");
+  
   const store = transaction.objectStore("pending");
+  
   const getAll = store.getAll();
 
   getAll.onsuccess = function () {
@@ -47,14 +54,18 @@ function checkDatabase() {
       })
         .then((response) => response.json())
         .then(() => {
+
           const transaction = db.transaction(["pending"], "readwrite");
 
+
           const store = transaction.objectStore("pending");
+
 
           store.clear();
         });
     }
   };
 }
+
 
 window.addEventListener("online", checkDatabase);

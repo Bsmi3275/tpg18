@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //connecting to Atlas (tricky)
-mongodb+srv://Bsmi3275:<Bensmith1>@tpg.uxc4o.mongodb.net/<tpg>?retryWrites=true&w=majority
+//mongodb+srv://Bsmi3275:<Bensmith1>@tpg.uxc4o.mongodb.net/<tpg>?retryWrites=true&w=majority
 
 app.use(logger("dev"));
 
